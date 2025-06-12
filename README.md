@@ -114,122 +114,158 @@ select * from orders_data where quantity between 3 and 5;
 
 sql
 select * from orders_data where quantity in (3,5);
-Pattern Matching (Prefix):
-"Find customers whose names start with 'A'."
+
+
+
+# Pattern Matching (Prefix):
+## "Find customers whose names start with 'A'."
 
 sql
 select * from orders_data where customer_name like 'A%';
-Pattern Matching (Suffix):
-"Find customers whose names end with 'n'."
+
+
+# Pattern Matching (Suffix):
+## "Find customers whose names end with 'n'."
 
 sql
 select * from orders_data where customer_name like '%n';
-Pattern Matching (Single Wildcard):
-"Find customers where the second character is 'e'."
+
+# Pattern Matching (Single Wildcard):
+## "Find customers where the second character is 'e'."
 
 sql
 select * from orders_data where customer_name like '_e%';
-Advanced Pattern Matching:
-"Find customers where the second character is either 'a' or 'e'."
+
+# Advanced Pattern Matching:
+## "Find customers where the second character is either 'a' or 'e'."
 
 sql
 select * from orders_data where customer_name like '_[ae]%';
-Aggregate Function (SUM):
-"Calculate the total sales across all orders."
+
+# Aggregate Function (SUM):
+## "Calculate the total sales across all orders."
 
 sql
 select sum(sales) as total_sales from orders_data;
-Aggregate Function (MAX):
-"Find the highest sales value in the dataset."
+
+# Aggregate Function (MAX):
+## "Find the highest sales value in the dataset."
 
 sql
 select max(sales) maxsales from orders_data;
-Aggregate Function (MIN):
-"Find the lowest sales value in the dataset."
+
+# Aggregate Function (MIN):
+## "Find the lowest sales value in the dataset."
 
 sql
 select min(sales) as minSales from orders_data;
-Aggregate Function (COUNT):
-"Count the total number of records in 'orders_data'."
+
+# Aggregate Function (COUNT):
+## "Count the total number of records in 'orders_data'."
 
 sql
 select COUNT(*) as total_no_record from orders_data;
-Manual Average Calculation:
-"Calculate average sales by dividing total sales by record count."
+
+# Manual Average Calculation:
+## "Calculate average sales by dividing total sales by record count."
 
 sql
 select sum(sales)/COUNT(*) as avg_sales from orders_data;
-Built-in Average:
-"Calculate the average sales using the AVG function."
+
+
+# Built-in Average:
+##  "Calculate the average sales using the AVG function."
 
 sql
 select AVG(sales) from orders_data;
-Null Handling:
-"Find orders where the city value is missing (NULL)."
+
+# Null Handling:
+## "Find orders where the city value is missing (NULL)."
 
 sql
 select * from orders_data where city is null;
-NOT IN Operator:
-"List orders where quantity sold is neither 3 nor 5."
+
+
+# NOT IN Operator:
+## "List orders where quantity sold is neither 3 nor 5."
 
 sql
 select * from orders_data where quantity not in(3,5);
-Distinct Values:
-"List all unique regions in the dataset."
+
+# Distinct Values:
+## "List all unique regions in the dataset."
 
 sql
 select distinct region from orders_data;
-Count Distinct:
-"Count the number of unique cities and categories in the dataset."
+
+# Count Distinct:
+## "Count the number of unique cities and categories in the dataset."
 
 sql
 select count(distinct city), count(distinct category) from orders_data;
-Grouping Data:
-"Calculate total profit for each customer."
+
+
+# Grouping Data:
+## "Calculate total profit for each customer."
 
 sql
 select customer_name, sum(profit) from orders_data group by customer_name;
-Multi-Column Grouping:
-"Calculate total sales and profit by region and city, sorted by region."
+
+# Multi-Column Grouping:
+## "Calculate total sales and profit by region and city, sorted by region."
 
 sql
 select region,city, sum(sales) total_sales, sum(profit) as total_profit from orders_data group by region,city order by region;
-Inner Join (Total Returned Sales):
-"Calculate the total sales value of returned items."
+
+# Inner Join (Total Returned Sales):
+## "Calculate the total sales value of returned items."
 
 sql
 select sum(sales) from orders_data inner join returns_data on orders_data.order_id=returns_data.order_id;
-Grouped Join (Category-wise Returns):
-"Calculate total returned sales by product category."
+
+# Grouped Join (Category-wise Returns):
+## "Calculate total returned sales by product category."
 
 sql
 select category, SUM(sales) from orders_data inner join returns_data on orders_data.order_id=returns_data.order_id group by category;
-Filtered Join:
-"Find all returned orders where the reason was 'wrong items' and the city was 'Troy'."
+# Filtered Join:
+## "Find all returned orders where the reason was 'wrong items' and the city was 'Troy'."
 
 sql
 select * from orders_data inner join returns_data on orders_data.order_id=returns_data.order_id where return_reason='wrong items' and city ='troy';
-Specific Order Join:
-*"Retrieve details for order ID 'CA-2020-111682' along with its return reason (if any)."*
+
+# Specific Order Join:
+## *"Retrieve details for order ID 'CA-2020-111682' along with its return reason (if any)."*
 
 sql
 select * from orders_data inner join returns_data on orders_data.order_id=returns_data.order_id where orders_data.order_id= 'CA-2020-111682';
-Left Join (All Orders + Returns):
-"List all orders along with their return reasons (if returned)."
+
+# Left Join (All Orders + Returns):
+##"List all orders along with their return reasons (if returned)."
 
 sql
 select * from orders_data o left join returns_data r on o.order_id=r.order_id;
-Anti-Join (Non-Returned Orders):
-"Find all orders that were never returned."
+
+# Anti-Join (Non-Returned Orders):
+## "Find all orders that were never returned."
 
 sql
 select * from orders_data o left join returns_data r on o.order_id=r.order_id where return_reason is null;
-Alternative Anti-Join:
-"Retrieve only order details (excluding return columns) for orders that were not returned."
+
+# Alternative Anti-Join:
+## "Retrieve only order details (excluding return columns) for orders that were not returned."
 
 sql
 select o.* from orders_data o left join returns_data r on o.order_id=r.order_id where r.return_reason is null;
-Quick Preview:
+# Quick Preview:
 "Show the first 3 records from 'orders_data'."
 
 sql
+
+
+
+
+# Total sales calculation
+sql
+SELECT SUM(sales) AS total_sales FROM orders_data;
+# Maximum sales value
