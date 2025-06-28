@@ -25,7 +25,7 @@ CREATE TABLE [dbo].[orders_data](
 sql
 select * from orders_data;
 
-# Join Query:
+
 ## "Retrieve all records from the 'returns_data' table."
 
 sql
